@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     def room_version = "2.2.1"
     def lifecycle_version = "2.0.0"
-
+    def lottieVersion = "3.7.0"
     // Room and Architectural Components
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
@@ -59,7 +59,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

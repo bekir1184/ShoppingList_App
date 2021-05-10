@@ -1,5 +1,7 @@
 package com.example.mvvmshoppinglistapp.ui
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -33,6 +35,13 @@ class MainFragment :Fragment(R.layout.fragment_main) {
 
         viewModel.getAllShoppingItems().observe(this.viewLifecycleOwner, Observer {
             adapter.items = it
+            if (it.size > 0) {
+                tvAlert.visibility = View.INVISIBLE
+                downLottie.visibility = View.INVISIBLE
+            } else {
+                downLottie.visibility = View.VISIBLE
+                tvAlert.visibility = View.VISIBLE
+            }
             adapter.notifyDataSetChanged()
         })
 
@@ -42,8 +51,22 @@ class MainFragment :Fragment(R.layout.fragment_main) {
                 object : AddDialogListener {
                     override fun onAddButtonClicked(item: ShoppingItem) {
                         viewModel.upsert(item)
+                        checkedLottie.visibility = View.VISIBLE
+                        checkedLottie.playAnimation()
                     }
                 }).show()
         }
+
+        checkedLottie.addAnimatorListener(object : AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+            }
+            override fun onAnimationEnd(animation: Animator) {
+             checkedLottie.visibility = View.INVISIBLE
+            }
+            override fun onAnimationCancel(animation: Animator) {
+            }
+            override fun onAnimationRepeat(animation: Animator) {
+            }
+        })
     }
 }
